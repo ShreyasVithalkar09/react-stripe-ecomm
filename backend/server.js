@@ -17,7 +17,7 @@ const stripe = Stripe(process.env.STRIPE_API_KEY);
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: "https://react-stripe-ecomm.onrender.com",
   })
 );
 
