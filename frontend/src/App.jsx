@@ -8,6 +8,9 @@ import PaymentSuccess from "./components/PaymentSuccess";
 import StripePayment from "./components/StripePayment";
 import Cart from "./components/Cart";
 import { MyCartProvider } from "./context/MyCartContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
   return (
@@ -17,10 +20,39 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Products />} />
+            <Route path="/sign-in" element={<Login />} />
+
             <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/payment" element={<StripePayment />} />
-            <Route path="/success" element={<PaymentSuccess />} />
-            <Route path="cart" element={<Cart />} />
+            <Route
+              path="/payment"
+              element={
+                <>
+                  <ProtectedRoute>
+                    <StripePayment />
+                  </ProtectedRoute>
+                </>
+              }
+            />
+            <Route
+              path="/success"
+              element={
+                <>
+                  <ProtectedRoute>
+                    <PaymentSuccess />
+                  </ProtectedRoute>
+                </>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
       </MyCartProvider>

@@ -4,12 +4,16 @@ import { Link, useParams } from "react-router-dom";
 import { getProduct } from "../api/store.api";
 import { useState } from "react";
 import { useCart } from "../context/MyCartContext";
+import { useUser, RedirectToSignIn } from "@clerk/clerk-react";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
+  const [redirecting, setRedirecting] = useState(false);
   const { id } = useParams();
 
-  const { addToCart, cart } = useCart();
+  const { isSignedIn, user } = useUser();
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -20,14 +24,20 @@ const ProductDetail = () => {
       }
     };
     fetchProduct();
+    return setRedirecting(false);
   }, []);
 
   const handleAddToCart = () => {
-    addToCart(product);
+    if (isSignedIn) {
+      addToCart(product);
+    } else {
+      setRedirecting(true);
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      {redirecting && <RedirectToSignIn />}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Product Image */}
         <div className="relative w-full h-80 bg-gray-100 rounded-lg overflow-hidden">
@@ -51,7 +61,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Add to Cart Button */}
-          {/* <Link to="/payment"> */}
+
           <div className="mt-6">
             <button
               onClick={handleAddToCart}

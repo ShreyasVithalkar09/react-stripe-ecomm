@@ -5,17 +5,20 @@ import { createPayment } from "../api/stripepayment.api";
 import PaymentForm from "./PaymentForm";
 import { useCart } from "../context/MyCartContext";
 import conf from "../config/conf";
+import { useAuth } from "@clerk/clerk-react";
 
 const stripe = loadStripe(conf.stripePublishableKey);
 
 const StripePayment = () => {
   const [clientSecret, setClientSecret] = useState(null);
+  const { getToken } = useAuth();
 
   const { cart } = useCart();
 
   useEffect(() => {
     const getPayment = async () => {
-      const { data } = await createPayment(cart);
+      const token = await getToken();
+      const { data } = await createPayment(cart, token);
       setClientSecret(data?.clientSecret);
     };
 

@@ -6,6 +6,7 @@ dotenv.config({
 import express from "express";
 import cors from "cors";
 import Stripe from "stripe";
+import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.get("/test", (req, res) => {
   });
 });
 
-app.post("/create-payment", async (req, res) => {
+app.post("/create-payment", ClerkExpressRequireAuth(), async (req, res) => {
   const { items } = req.body;
 
   const paymentIntent = await stripe.paymentIntents.create({

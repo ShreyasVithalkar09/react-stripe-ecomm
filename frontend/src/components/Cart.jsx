@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../context/MyCartContext";
 import { Link } from "react-router-dom";
+import { RedirectToSignIn, useUser } from "@clerk/clerk-react";
 
 const Cart = () => {
   const { cart, removeFromCart } = useCart();
