@@ -16,6 +16,8 @@ const Products = () => {
     };
 
     fetchProducts();
+
+    window.history.replaceState(null, "", window.location.href);
   }, []);
 
   return (
