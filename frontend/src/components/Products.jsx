@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setIsLoading(true);
       const { data } = await getProducts();
       if (data || data.length > 0) {
         setProducts(data);
@@ -18,7 +20,13 @@ const Products = () => {
     fetchProducts();
 
     window.history.replaceState(null, "", window.location.href);
+
+    return setIsLoading(false);
   }, []);
+
+  if (!products || products.length <= 0) {
+    return <p className="text-center text-xl text-grey-900 ">Loading...</p>;
+  }
 
   return (
     <>
