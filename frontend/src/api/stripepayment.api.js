@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const BASE_URL = "http://localhost:4000";
+import conf from "../config/conf";
 
 export const createPayment = async (cartItems, token) => {
   return await axios.post(
-    `${BASE_URL}/create-payment`,
+    `${conf.apiUrl}/create-payment`,
     {
       items: cartItems,
     },
