@@ -8,3 +8,5 @@ This is a shopping cart web application built with ReactJS, created as a hobby p
 - **Responsive UI**: Beautiful, responsive design built with Daisy UI, an open-source library for styling UI components.
 - **State Management**: Utilized React’s Context API for global state management across the app, keeping track of cart items, user authentication, and payment status.
 - **Product Data**: Integrated with the Fake Store API to fetch a variety of products and display them dynamically on the site.
+
+Made with ♥️ by Shreyas
