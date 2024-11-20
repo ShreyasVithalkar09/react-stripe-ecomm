@@ -26,7 +26,6 @@ const calculateTotalOrderAmount = (items) => {
   items?.forEach((item) => {
     totalPrice += item.price * 100;
   });
-  console.log(totalPrice);
   return totalPrice;
 };
 
