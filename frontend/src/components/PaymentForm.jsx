@@ -5,7 +5,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-const PAYMENT_SUCESS_URL = "https://react-stripe-ecomm.onrender.com/success";
+const PAYMENT_SUCESS_URL = "http://localhost:5173/success";
 
 const PaymentForm = () => {
   const stripe = useStripe();
