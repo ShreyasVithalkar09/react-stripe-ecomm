@@ -43,10 +43,6 @@ app.post("/create-payment", ClerkExpressRequireAuth(), async (req, res) => {
     currency: "usd",
     description: "This is for Stripe API Demo",
     payment_method_types: ["card"],
-
-    // automatic_payment_methods: {
-    //   enabled: true,
-    // },
   });
 
   res.status(201).json({
